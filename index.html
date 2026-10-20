@@ -63,7 +63,7 @@ canvas{position:fixed;inset:0;width:100%;height:100%;z-index:1}
 </head>
 <body>
 
-<!-- Thẻ nhạc (Không tự phát khi vào web) -->
+<!-- THẺ NHẠC: Đọc file nhac.mp3 cùng thư mục -->
 <audio id="bg-music" loop>
   <source src="nhac.mp3" type="audio/mpeg">
 </audio>
@@ -100,14 +100,14 @@ let W=0,H=0,cell=30,cols=12,rows=20,ox=0,oy=0;
 const GOAL=10,STEP=135,PINK=['#ff80ab','#ff4081','#ffd1e3','#f48fb1','#fff'];
 let stage=-1,started=false,sphereDispersed=false,letterOpened=false,typer=null;
 
-/* ---------- Nhạc nền (Chỉ phát 2s sau khi ăn cục thứ 10) ---------- */
+/* ---------- Nhạc nền: Phát 2s sau khi ăn cục thứ 10 ---------- */
 const bgMusic = document.getElementById('bg-music');
 function playMusicWithDelay(){
   if(bgMusic){
     bgMusic.volume = 0.85;
     setTimeout(() => {
-      bgMusic.play().catch(e => console.log("Trình duyệt chặn phát nhạc:", e));
-    }, 2000);
+      bgMusic.play().catch(e => console.log("Trình duyệt chặn tự động phát nhạc:", e));
+    }, 2000); // 2000 mili-giây = đúng 2 giây sau
   }
 }
 
@@ -190,7 +190,7 @@ function begin(){
 function win(){
   playing=false;stage=1;$('hud').style.opacity=0;$('winmsg').classList.add('show');
   
-  // Phát nhạc trễ 2 giây sau khi ăn cục thứ 10
+  // Kích hoạt phát nhạc trễ đúng 2 giây sau khi ăn cục thứ 10
   playMusicWithDelay();
 
   for(let k=0;k<7;k++)setTimeout(()=>burst(W*(.15+Math.random()*.7),H*(.15+Math.random()*.6),18,['#ff80ab','#ffe082','#fff','#ff4081']),k*260);
